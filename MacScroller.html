@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height:100%;
+				overflow:hidden;
+			}
+			#wrap > img{
+				width: 100px;
+				border:dashed 2px;
+				margin: -2px;
+			}
+			#wrap{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				
+				width:100%;
+				text-align: center;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id="wrap">
+			<img src="img/Desert1.bmp"></img>
+			<img src="img/Grass1.bmp"></img>
+			<img src="img/Dirt1.bmp"></img>
+			<img src="img/Lavender1.bmp"></img>
+			<img src="img/Treasure1.bmp"></img>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			window.onload=function myFunc(){
+				var r = 100;
+				var imgNodes = document.querySelectorAll("#wrap > img");
+				
+				for(var i = 0; i < imgNodes.length; i++){
+					imgNodes[i].addEventListener("click",
+					function(){
+						console.log(this);
+					});
+				}
+				
+				document.onmousemove=function(ev){
+					for(var i = 0; i < imgNodes.length; i++){
+						var a = imgNodes[i].getBoundingClientRect().left
+						+ imgNodes[i].offsetWidth/2 - ev.clientX;
+						var b = imgNodes[i].getBoundingClientRect().top
+						+ imgNodes[i].offsetHeight/2 - ev.clientY;
+						
+						var c = Math.sqrt(a*a + b*b);
+						
+						if(c>=r){
+							c = r;
+						}
+						imgNodes[i].style.width = 100 - c*0.5 + "px";
+						
+						
+					}
+				}
+				
+			};
+			
+		</script>
+	</body>
+
+</html>

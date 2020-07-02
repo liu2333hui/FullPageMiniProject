@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html id="html" style="margin:10px;">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			#inner1{
+				position:relative;
+				background:red;
+				left: 100px;
+				top:20px;
+			}
+			#inner2{
+				position:relative;
+				background:blue;
+				left: 100px;
+				top:20px;
+			}
+			#inner3{
+				position:relative;
+				background:hotpink;
+				left:20px;
+				top:20px;
+			}
+			#wrap{
+				position: absolute;
+				background: pink;
+				left:100px;
+				width: 400px;
+				height: 400px;
+				border:10px;
+				margin:10px;
+				
+			}
+			div{
+				width: 200px;
+				height: 200px;
+				border:dashed 2px;
+			}
+			html,body{
+				height: 100%;
+			}
+			
+		</style>
+		
+	</head>
+	<body id = "body" style="height:3000px; width:3000px;">
+		<!--
+		<ol class="list">
+			<li>xsf<a href="javascript:;">删除</a></li>
+			<li>xsf2<a href="javascript:;">删除</a></li>
+			<li>xsf22<a href="javascript:;">删除</a></li>
+			<li>xsf222<a href="javascript:;">删除</a></li>
+			<li>xsf2223<a href="javascript:;">删除</a></li>
+			<li>xsf2223<a href="javascript:;">删除</a></li>
+			<li>xsf2223<a href="javascript:;">删除</a></li>
+			
+		</ol>
+		-->
+		
+		<div id="wrap">wrap
+			<div id="inner1">inner1
+				<div id="inner2">inner2
+					<div id="inner3">
+						inner3
+						<br>
+						<img src='img/Desert1.bmp'>
+						</img>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+	<script type="text/javascript">
+		//console.log("hello");
+		window.onload = function(){
+			var wrap = document.querySelector("#inner3");
+			console.log(wrap.clientWidth, wrap.clientHeight);
+		
+		console.log(wrap.offsetWidth, wrap.offsetHeight);
+		console.log(document.documentElement.clientWidth,
+					document.documentElement.offsetWidth);
+		}
+		
+		window.onscroll = function(){
+			//console.log(inner3.offsetParent.id, inner3.offsetTop);
+			console.log("rel distance");
+			console.log(getPointRel(inner3));
+			console.log(inner3.getBoundingClientRect());
+			var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+			var T = document.documentElement.scrollTop || document.body.scrollTop;
+			
+			
+			console.log(L,T);
+			/*
+			var aNodes = document.querySelectorAll(".list > li > a");
+			console.log(aNodes);
+			
+			for(var i=0; i<aNodes.length ;i++){
+				 aNodes[i].onclick = function(){
+				 	this
+				 }
+			}
+			*/
+		}
+		
+		function getPointAb(node){
+			var x = 0;
+			var y = 0;
+			
+			while(node){
+				y += node.offsetTop;
+				x += node.offsetLeft;
+				node = node.offsetParent;
+			}
+			return {x:x, y:y};
+		}
+		
+		function getPointRel(node){
+			var x = 0;
+			var y = 0;
+			
+			while(node){
+				y += (node.offsetTop );
+				x += (node.offsetLeft );
+				node = node.offsetParent;
+			}
+			var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+			var T = document.documentElement.scrollTop || document.body.scrollTop;
+			
+			
+			
+			return {x:(x-L), y:(y-T)};
+		}
+	</script>
+</html>
